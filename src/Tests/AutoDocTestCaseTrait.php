@@ -1,9 +1,9 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Tests;
+namespace EugMerkeleon\Support\AutoDoc\Tests;
 
-use RonasIT\Support\AutoDoc\Services\SwaggerService;
-use RonasIT\Support\AutoDoc\Http\Middleware\AutoDocMiddleware;
+use EugMerkeleon\Support\AutoDoc\Http\Middleware\AutoDocMiddleware;
+use EugMerkeleon\Support\AutoDoc\Services\SwaggerService;
 
 trait AutoDocTestCaseTrait
 {
@@ -16,28 +16,31 @@ trait AutoDocTestCaseTrait
         $this->docService = app(SwaggerService::class);
     }
 
-    public function createApplication()
-    {
-        parent::createApplication();
-    }
-
-    public function tearDown(): void
-    {
-        $currentTestCount = $this->getTestResultObject()->count();
-        $allTestCount = $this->getTestResultObject()->topTestSuite()->count();
-
-        if (($currentTestCount == $allTestCount) && (!$this->hasFailed())) {
-            $this->docService->saveProductionData();
-        }
-
-        parent::tearDown();
-    }
-
     /**
      * Disabling documentation collecting on current test
      */
     public function skipDocumentationCollecting()
     {
         AutoDocMiddleware::$skipped = true;
+    }
+
+    public function tearDown(): void
+    {
+        if (!$this->isInIsolation())
+        {
+            $currentTestCount = $this->getTestResultObject()
+                                     ->count();
+            $allTestCount     = $this->getTestResultObject()
+                                     ->topTestSuite()
+                                     ->count();
+
+            if (!$this->hasFailed() && ($currentTestCount === $allTestCount))
+            {
+                $this->docService->saveProductionData();
+            }
+        }
+
+
+        parent::tearDown();
     }
 }

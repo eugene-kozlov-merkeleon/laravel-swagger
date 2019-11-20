@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc;
+namespace EugMerkeleon\Support\AutoDoc;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -8,19 +8,20 @@ class AutoDocServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        if (config('app.env') === 'production')
+        {
+            return;
+        }
         $this->publishes([
             __DIR__ . '/../config/auto-doc.php' => config_path('auto-doc.php'),
-        ], 'config');
-
-        $this->publishes([
-            __DIR__ . '/../config/local-data-collector.php' => config_path('local-data-collector.php'),
         ], 'config');
 
         $this->publishes([
             __DIR__ . '/Views/swagger-description.blade.php' => resource_path('views/swagger-description.blade.php'),
         ], 'view');
 
-        if (!$this->app->routesAreCached()) {
+        if (!$this->app->routesAreCached())
+        {
             require __DIR__ . '/Http/routes.php';
         }
 

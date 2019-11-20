@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Exceptions;
+namespace EugMerkeleon\Support\AutoDoc\Exceptions;
 
 use Exception;
 
@@ -8,7 +8,8 @@ class DataCollectorClassNotFoundException extends Exception
 {
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
-        if (empty($message)) {
+        if (empty($message))
+        {
             $message = "DataCollectorClass was not found. Please check configuration file";
         }
 

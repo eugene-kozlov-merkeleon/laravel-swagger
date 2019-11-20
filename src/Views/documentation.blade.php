@@ -5,9 +5,9 @@
     <title>{{ config('auto-doc.info.title') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
           rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/auto-doc/swagger-ui.css">
-    <link rel="icon" type="image/png" href="/auto-doc/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/auto-doc/favicon-16x16.png" sizes="16x16"/>
+    <link rel="stylesheet" type="text/css" href="/account/api/v2/swagger-ui.css">
+    <link rel="icon" type="image/png" href="/account/api/v2/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/account/api/v2/favicon-16x16.png" sizes="16x16"/>
     <style>
         html {
             box-sizing: border-box;
@@ -67,13 +67,13 @@
 
 <div id="swagger-ui"></div>
 
-<script src="/auto-doc/swagger-ui-bundle.js"></script>
-<script src="/auto-doc/swagger-ui-standalone-preset.js"></script>
+<script src="/account/api/v2/swagger-ui-bundle.js"></script>
+<script src="/account/api/v2/swagger-ui-standalone-preset.js"></script>
 <script>
   window.onload = function () {
     // Build a system
     const ui = SwaggerUIBundle({
-      url: "/auto-doc/documentation",
+      url: "/account/api/v2/documentation",
       dom_id: '#swagger-ui',
       presets: [
         SwaggerUIBundle.presets.apis,

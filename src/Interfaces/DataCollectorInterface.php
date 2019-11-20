@@ -1,15 +1,13 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Interfaces;
+namespace EugMerkeleon\Support\AutoDoc\Interfaces;
 
 interface DataCollectorInterface
 {
     /**
-     * Save temporary data
-     *
-     * @param array $data
+     * Get production documentation
      */
-    public function saveTmpData($data);
+    public function getDocumentation();
 
     /**
      * Get temporary data
@@ -22,9 +20,11 @@ interface DataCollectorInterface
     public function saveData();
 
     /**
-     * Get production documentation
+     * Save temporary data
+     *
+     * @param array $data
      */
-    public function getDocumentation();
+    public function saveTmpData($data);
 }
 
 

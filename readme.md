@@ -10,21 +10,24 @@ to display the generated documentation for a config.
 ## Installation
 
 ### Composer
- 1. `composer require ronasit/laravel-swagger`
+ 1. add `"repositories": [{
+               "type": "vcs",
+               "url": "https://github.com/eugene-kozlov-merkeleon/laravel-swagger.git"
+             }],` in your composer.json
+ 2. `composer require EugMerkeleon/laravel-swagger:master`
 
 ### Laravel
- 1. add `RonasIT\Support\AutoDoc\AutoDocServiceProvider::class,` to providers in `config/app.php`
- 1. run `php artisan vendor:publish`
+ 3. add `EugMerkeleon\Support\AutoDoc\AutoDocServiceProvider::class,` to providers in `config/app.php`
+ 4. run `php artisan vendor:publish`
  
 ### Plugin
- 1. Add middleware **\RonasIT\Support\AutoDoc\Http\Middleware\AutoDocMiddleware::class** to *Http/Kernel.php*.
- 1. Use **\RonasIT\Support\AutoDoc\Tests\AutoDocTestCaseTrait** in your TestCase in *tests/TestCase.php*
- 1. In *config/auto-doc.php* you can specify enabling of plugin, info of your project, 
+ 5. Add middleware **\EugMerkeleon\Support\AutoDoc\Http\Middleware\AutoDocMiddleware::class** to *Http/Kernel.php*.
+ 6. Use **\EugMerkeleon\Support\AutoDoc\Tests\AutoDocTestCaseTrait** in your TestCase in *tests/TestCase.php*
+ 7. In *config/auto-doc.php* you can specify enabling of plugin, info of your project, 
  some defaults descriptions and route for rendering of documentation. 
- 1. In *.env* file you should add following lines
+ 8. In *.env* file you should add following lines
     `
-    LOCAL_DATA_COLLECTOR_PROD_PATH=/example-folder/documentation.json  
-    LOCAL_DATA_COLLECTOR_TEMP_PATH=/tmp/documentation.json
+    LOCAL_DATA_COLLECTOR_PROD_PATH=/example-folder/documentation.json
     `
 
 ## Usages

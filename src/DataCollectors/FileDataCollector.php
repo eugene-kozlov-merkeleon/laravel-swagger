@@ -2,14 +2,12 @@
 
 namespace EugMerkeleon\Support\AutoDoc\DataCollectors;
 
-use EugMerkeleon\Support\AutoDoc\Exceptions\MissedProductionFilePathException;
-use EugMerkeleon\Support\AutoDoc\Interfaces\DataCollectorInterface;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use EugMerkeleon\Support\AutoDoc\Interfaces\DataCollectorInterface;
+use EugMerkeleon\Support\AutoDoc\Exceptions\MissedProductionFilePathException;
 
-class LocalDataCollector implements DataCollectorInterface
+class FileDataCollector implements DataCollectorInterface
 {
-    protected static $data;
-
     public $prodFilePath;
 
     public function __construct()
@@ -27,19 +25,20 @@ class LocalDataCollector implements DataCollectorInterface
 
     public function saveTmpData($tempData)
     {
-        self::$data = $tempData;
+        $content = json_decode(file_get_contents($this->prodFilePath), true) ?? [];
+        $content = $tempData;
+        file_put_contents($this->prodFilePath, json_encode($content));
+        unset($content);
     }
 
     public function getTmpData()
     {
-        return self::$data;
+        return json_decode(file_get_contents($this->prodFilePath), true) ?? [];
     }
 
     public function saveData()
     {
-        $content = json_encode(self::$data);
-        file_put_contents($this->prodFilePath, $content);
-        self::$data = [];
+        //If your tests runing in isolation, then this method is not needed. Each request will save to a file.
     }
 
     public function getDocumentation()

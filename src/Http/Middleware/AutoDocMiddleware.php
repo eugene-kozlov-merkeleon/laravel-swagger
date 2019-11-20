@@ -1,17 +1,17 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Http\Middleware;
+namespace EugMerkeleon\Support\AutoDoc\Http\Middleware;
 
 use Closure;
-use RonasIT\Support\AutoDoc\Services\SwaggerService;
+use EugMerkeleon\Support\AutoDoc\Services\SwaggerService;
 
 /**
  * @property SwaggerService $service
  */
 class AutoDocMiddleware
 {
-    protected $service;
     public static $skipped = false;
+    protected     $service;
 
     public function __construct()
     {
@@ -22,7 +22,8 @@ class AutoDocMiddleware
     {
         $response = $next($request);
 
-        if ((config('app.env') == 'testing') && !self::$skipped) {
+        if ((config('app.env') == 'testing') && !self::$skipped && config('auto-doc.enabled'))
+        {
             $this->service->addData($request, $response);
         }
 
