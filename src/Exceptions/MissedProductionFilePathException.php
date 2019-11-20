@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Exceptions;
+namespace EugMerkeleon\Support\AutoDoc\Exceptions;
 
 use Exception;
 

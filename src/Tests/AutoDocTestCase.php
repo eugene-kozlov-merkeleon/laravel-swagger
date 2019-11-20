@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Tests;
+namespace EugMerkeleon\Support\AutoDoc\Tests;
 
 use Illuminate\Foundation\Testing\TestCase;
 

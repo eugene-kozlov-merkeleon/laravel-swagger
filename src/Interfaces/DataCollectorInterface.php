@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Interfaces;
+namespace EugMerkeleon\Support\AutoDoc\Interfaces;
 
 interface DataCollectorInterface
 {

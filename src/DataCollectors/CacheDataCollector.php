@@ -3,18 +3,21 @@
 namespace EugMerkeleon\Support\AutoDoc\DataCollectors;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use EugMerkeleon\Support\AutoDoc\Interfaces\DataCollectorInterface;
-use EugMerkeleon\Support\AutoDoc\Exceptions\MissedProductionFilePathException;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+use EugMerkeleon\Support\Interfaces\DataCollectorInterface;
+use EugMerkeleon\Support\DataCollectors\Exceptions\MissedProductionFilePathException;
 
-class LocalDataCollector implements DataCollectorInterface
+class CacheDataCollector implements DataCollectorInterface
 {
     public $prodFilePath;
-
-    protected static $data;
+    public $keyName;
 
     public function __construct()
     {
         $this->prodFilePath = config('auto-doc.production_path');
+        $this->keyName = config('auto-doc.cache_collector_name') ?: 'auto_doc' . Str::random();
+
         if (empty($this->prodFilePath))
         {
             throw new MissedProductionFilePathException();
@@ -23,19 +26,24 @@ class LocalDataCollector implements DataCollectorInterface
 
     public function saveTmpData($tempData)
     {
-        self::$data = $tempData;
+        Cache::forever($this->keyName, $tempData);
     }
 
     public function getTmpData()
     {
-        return self::$data;
+        return Cache::get($this->keyName, []);
     }
 
     public function saveData()
     {
-        $content = json_encode(self::$data);
+        $data = Cache::get($this->keyName, []);
+        $content = json_encode($data);
+
         file_put_contents($this->prodFilePath, $content);
-        self::$data = [];
+
+        Cache::forget($this->keyName);
+        unset($data);
+
     }
 
     public function getDocumentation()
@@ -44,8 +52,10 @@ class LocalDataCollector implements DataCollectorInterface
         {
             throw new FileNotFoundException();
         }
+
         $fileContent = file_get_contents($this->prodFilePath);
 
         return json_decode($fileContent);
     }
+
 }

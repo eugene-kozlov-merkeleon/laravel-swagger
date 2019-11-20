@@ -1,6 +1,6 @@
 <?php
 
-namespace RonasIT\Support\AutoDoc\Traits;
+namespace EugMerkeleon\Support\AutoDoc\Traits;
 
 /**
  * @deprecated

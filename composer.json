@@ -1,5 +1,5 @@
 {
-  "name": "ronasit/laravel-swagger",
+  "name": "EugMerkeleon/laravel-swagger",
   "description": "Provided middleware for generating of swagger-documentation file by run testing of RESTful API.",
   "keywords": [
     "laravel",
@@ -11,8 +11,8 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Roman Dubrovin",
-      "email": "rdubrovin@ronasit.com"
+      "name": "Eugene Kozlov",
+      "email": "ekozlov@merkeleon.com"
     }
   ],
   "require": {
@@ -22,10 +22,17 @@
   },
   "autoload": {
     "psr-4": {
-      "RonasIT\\Support\\AutoDoc\\": "src/"
+      "EugMerkeleon\\Support\\AutoDoc\\": "src/"
     },
     "exclude-from-classmap": [
       "src/Tests/"
     ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "EugMerkeleon\\Support\\AutoDoc\\AutoDocServiceProvider"
+      ]
+    }
   }
 }

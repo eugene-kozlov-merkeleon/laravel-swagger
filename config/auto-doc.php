@@ -14,6 +14,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Production file Path
+    |--------------------------------------------------------------------------
+    |
+    | Path which will return production file
+    */
+
+    'production_path' => env('LOCAL_DATA_COLLECTOR_PROD_PATH'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Info block
     |--------------------------------------------------------------------------
     |
@@ -80,7 +90,10 @@ return [
         'code-descriptions' => [
             '200' => 'Operation successfully done',
             '204' => 'Operation successfully done',
-            '404' => 'This entity not found'
+            '401' => 'Authentication is required and has failed or has not yet been provided.',
+            '403' => 'The request contained valid data, but the server is refusing action. 
+            May be you not having the necessary permissions for a resource',
+            '404' => 'This entity not found',
         ]
     ],
 
@@ -100,5 +113,14 @@ return [
     | If config not set, will be using ronasit/local-data-collector
     */
 
-    'data_collector' => \RonasIT\Support\AutoDoc\DataCollectors\LocalDataCollector::class
+    'data_collector' => \RonasIT\Support\AutoDoc\DataCollectors\LocalDataCollector::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Data Collector Class
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+    'cache_collector_name' => '',
 ];
