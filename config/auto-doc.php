@@ -21,7 +21,10 @@ return [
     | Route which will return documentation
     */
 
-    'route' => 'api/v2',
+    'route' => [
+        'index'         => '/api/v2',
+        'documentation' => '/api/documentation/auto-doc',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +34,9 @@ return [
     | Path which will return production file
     */
 
-    'production_path' => env('AUTODOC_PROD_PATH', base_path('auto-doc.yaml')),
+    'production_path' => env('AUTODOC_PROD_PATH', base_path('auto-doc.json')),
+    'path_dir_static' => env('AUTODOC_PATH_DIR_STATIC', ''),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +46,7 @@ return [
     | Information fields
     */
 
-    'info' => [
+    'info'    => [
 
         /*
         |--------------------------------------------------------------------------
