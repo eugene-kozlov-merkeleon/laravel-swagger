@@ -5,9 +5,9 @@
     <title>{{ config('auto-doc.info.title') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
           rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/account/api/v2/swagger-ui.css">
-    <link rel="icon" type="image/png" href="/account/api/v2/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/account/api/v2/favicon-16x16.png" sizes="16x16"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('auto-doc.path_dir_static') }}/swagger-ui.css">
+    <link rel="icon" type="image/png" href="{{ config('auto-doc.path_dir_static') }}/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="{{ config('auto-doc.path_dir_static') }}/favicon-16x16.png" sizes="16x16"/>
     <style>
         html {
             box-sizing: border-box;
@@ -67,27 +67,27 @@
 
 <div id="swagger-ui"></div>
 
-<script src="/account/api/v2/swagger-ui-bundle.js"></script>
-<script src="/account/api/v2/swagger-ui-standalone-preset.js"></script>
+<script src="{{ config('auto-doc.path_dir_static') }}/swagger-ui-bundle.js"></script>
+<script src="{{ config('auto-doc.path_dir_static') }}/swagger-ui-standalone-preset.js"></script>
 <script>
-  window.onload = function () {
-    // Build a system
-    const ui = SwaggerUIBundle({
-      url: "/account/api/v2/documentation",
-      dom_id: '#swagger-ui',
-      presets: [
-        SwaggerUIBundle.presets.apis,
-        // yay ES6 modules ↘
-        Array.isArray(SwaggerUIStandalonePreset) ? SwaggerUIStandalonePreset : SwaggerUIStandalonePreset.default
-      ],
-      plugins: [
-        SwaggerUIBundle.plugins.DownloadUrl
-      ],
-      layout: "StandaloneLayout"
-    })
+    window.onload = function () {
+        // Build a system
+        const ui = SwaggerUIBundle({
+            url: "{{ config('auto-doc.route.documentation') }}",
+            dom_id: '#swagger-ui',
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                // yay ES6 modules ↘
+                Array.isArray(SwaggerUIStandalonePreset) ? SwaggerUIStandalonePreset : SwaggerUIStandalonePreset.default
+            ],
+            plugins: [
+                SwaggerUIBundle.plugins.DownloadUrl
+            ],
+            layout: "StandaloneLayout"
+        })
 
-    window.ui = ui
-  }
+        window.ui = ui
+    }
 </script>
 </body>
 
